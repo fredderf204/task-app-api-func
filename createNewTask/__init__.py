@@ -45,7 +45,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     document = {
         "id": collection.count_documents({}) + 1,
         "completed": False,
-        "description": description,
+        "description": str(description),
         "duedate": duedaten,
         "title": title
     }

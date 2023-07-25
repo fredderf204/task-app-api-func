@@ -19,10 +19,15 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     db = client[database_name]
     collection = db[collection_name]
 
-    # Get details from parameters
-    description = req.params.get('description')
-    duedate = req.params.get('duedate')
-    title = req.params.get('title')
+    # Decode form data
+    body_unicode = req.get_body().decode('utf-8')
+    from urllib.parse import parse_qs
+    req_bodyd = parse_qs(body_unicode)
+
+    # Get details from from data
+    description = req_bodyd['description']
+    duedate = str(req_bodyd['duedate'])
+    title = req_bodyd['title']
 
     # Sense check
     if title is None:

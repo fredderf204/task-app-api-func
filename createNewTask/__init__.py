@@ -25,9 +25,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     req_bodyd = parse_qs(body_unicode)
 
     # Get details from from data
-    description = req_bodyd['description']
+    description = str(req_bodyd['description'])
     duedate = str(req_bodyd['duedate'])
-    title = req_bodyd['title']
+    title = str(req_bodyd['title'])
 
     # Sense check
     if title is None:
@@ -45,7 +45,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     document = {
         "id": collection.count_documents({}) + 1,
         "completed": False,
-        "description": str(description),
+        "description": description,
         "duedate": duedaten,
         "title": title
     }
